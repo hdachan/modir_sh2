@@ -11,19 +11,25 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
-  static const List<String> _routes = ['/map', '/community', '/mypage'];
+  static const List<String> _routes = ['/community', '/map', '/mypage'];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final location = GoRouterState.of(context).uri.toString();
     setState(() {
-      if (location.startsWith('/community')) {
-        _selectedIndex = 1;
-      } else if (location.startsWith('/mypage')) {
-        _selectedIndex = 2;
-      } else {
-        _selectedIndex = 0;
+      switch (true) {
+        case bool _ when location.startsWith('/community'):
+          _selectedIndex = 0; // 탐색
+          break;
+        case bool _ when location.startsWith('/map'):
+          _selectedIndex = 1; // 마이큐레이션
+          break;
+        case bool _ when location.startsWith('/mypage'):
+          _selectedIndex = 2; // 마이
+          break;
+        default:
+          _selectedIndex = 0; // 기본값: /community
       }
     });
   }
@@ -48,8 +54,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                 currentIndex: _selectedIndex,
                 onTap: _onItemTapped,
                 items: const [
-                  BottomNavigationBarItem(icon: Icon(Icons.location_on_outlined), label: '지도'),
-                  BottomNavigationBarItem(icon: Icon(Icons.sports_kabaddi_outlined), label: '커뮤니티'),
+                  BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), label: '탐색'),
+                  BottomNavigationBarItem(icon: Icon(Icons.view_agenda_outlined), label: '마이큐레이션'),
                   BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: '마이'),
                 ],
               ),

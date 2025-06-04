@@ -4,7 +4,7 @@ import '../Auth/views/AgreePage.dart';
 import '../Auth/views/LoginSelectionScreen.dart';
 import '../Auth/views/SignUppage.dart';
 import '../Curation/curation.dart';
-import '../MapScreen.dart';
+import '../feed/views/MapScreen.dart';
 import '../Mypage/views/Mypage.dart';
 import '../Mypage/views/SettingScreen.dart';
 import '../Mypage/views/WithdrawalScreen.dart';

@@ -187,7 +187,7 @@ class _Card2State extends State<Card2> {
                       borderRadius: BorderRadius.circular(2),
                     ),
                     child: Text(
-                      '관심 매장', // 관심 매장으로 표시
+                      '신규 큐레이션', // 관심 매장으로 표시
                       style: TextStyle(
                         color: const Color(0xFF888888),
                         fontSize: 8,

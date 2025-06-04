@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:provider/provider.dart';
 import 'Auth/Service/AuthService.dart';
 import 'Auth/ViewModel/AuthViewModel.dart';
+import 'Curation/ViewModel/Test6ViewModel.dart';
 import 'Mypage/viewmodels/ProfileViewModel.dart';
 import 'Mypage/viewmodels/WithdrawalViewModel.dart';
 import 'feed/sevices/FeedService.dart';
@@ -10,8 +11,6 @@ import 'feed/sevices/supabase_service.dart';
 import 'feed/viewmodels/FeedViewModel.dart';
 import 'feed/viewmodels/Screen3ViewModel.dart';
 import 'feed/viewmodels/messageViewModel.dart';
-import 'feed/views/messagescreen1.dart';
-import 'feed/views/screen3.dart';
 import 'utils/router.dart';
 import 'confing/SupabaseConfig.dart';
 
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FeedViewModel()),
         ChangeNotifierProvider(create: (_) => Test1ViewModel(SupabaseService())),
         ChangeNotifierProvider(create: (_) => Screen3ViewModel(FeedService(), SupabaseService())),
-        // ScreenViewModel 제거 (정의되지 않았거나 불필요한 경우)
+        ChangeNotifierProvider(create: (_) => Test6ViewModel()), // Test6ViewModel 추가
       ],
       child: MaterialApp.router(
         title: 'modirApp',

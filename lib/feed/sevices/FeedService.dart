@@ -4,6 +4,23 @@ import '../models/Feedmodel.dart';
 
 class FeedService {
   final SupabaseClient _supabase = Supabase.instance.client;
+
+  Future<int> fetchFeedCount() async {
+    print('Starting fetchFeedCount'); // 디버깅 로그
+    try {
+      final response = await _supabase
+          .from('feed')
+          .select('feed_id')
+          .eq('status', 0) // status = 0인 행만 카운트
+          .count();
+      print('Response count: ${response.count}'); // 디버깅 로그
+      return response.count;
+    } catch (e) {
+      print('Error fetching count: $e'); // 에러 로그
+      return 0; // 에러 발생 시 0 반환
+    }
+  }
+
   Future<List<Feed>> fetchFeeds() async {
     try {
       final userId = _supabase.auth.currentUser?.id;

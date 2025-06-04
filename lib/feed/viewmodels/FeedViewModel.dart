@@ -10,6 +10,15 @@ class FeedViewModel extends ChangeNotifier {
   Feed? selectedFeed; // 기존에 selectedFeed가 없었으므로 추가
   bool isLoading = false;
 
+  int _feedCount = 0;
+  int get feedCount => _feedCount;
+
+  Future<void> loadFeedCount() async {
+    _feedCount = await FeedService().fetchFeedCount();
+    print('Feed count in viewModel: $_feedCount'); // 디버깅 로그 추가
+    notifyListeners();
+  }
+
   Future<void> fetchFeeds() async {
     isLoading = true;
     notifyListeners();
