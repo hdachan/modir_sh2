@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "modir-club",
+          "appId": "1:950052133883:android:ca860eec8aaa7489a2095e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "modir-club",
+          "configurations": {
+            "android": "1:950052133883:android:ca860eec8aaa7489a2095e",
+            "ios": "1:950052133883:ios:b310905bd64485aea2095e",
+            "macos": "1:950052133883:ios:b310905bd64485aea2095e",
+            "web": "1:950052133883:web:3254684d2d6e9ea0a2095e",
+            "windows": "1:950052133883:web:3d95aa42e1ab0b6fa2095e"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

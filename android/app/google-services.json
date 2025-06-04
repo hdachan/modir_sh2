@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950052133883",
+    "project_id": "modir-club",
+    "storage_bucket": "modir-club.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950052133883:android:ca860eec8aaa7489a2095e",
+        "android_client_info": {
+          "package_name": "com.example.untitled114"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQHDTQEFl-tywaxSixi7rNexNrlajs-Is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
