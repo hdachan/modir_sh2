@@ -74,14 +74,47 @@ class FeedScreen extends StatelessWidget {
                   ],
                 ),
                 backgroundColor: Colors.white,
-                floatingActionButton: FloatingActionButton(
-                  onPressed: () {
+                floatingActionButton: GestureDetector(
+                  onTap: () {
                     context.go('/community/write');
                   },
-                  backgroundColor: Colors.blue,
-                  child: const Icon(Icons.edit, color: Colors.white),
-                  tooltip: '글쓰기',
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFF3D3D3D),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      shadows: [
+                        BoxShadow(
+                          color: const Color(0x14000000),
+                          blurRadius: 8,
+                          offset: Offset(0, 0),
+                          spreadRadius: 0,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.add, color: Colors.white, size: 16),
+                        const SizedBox(width: 4),
+                        const Text(
+                          '글쓰기',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            height: 1.3,
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+
               ),
             ),
           );

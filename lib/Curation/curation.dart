@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:intl/intl.dart'; // 날짜 포맷팅을 위해 추가
@@ -85,7 +86,7 @@ class _Test6State extends State<Test6> {
                             child: Row(
                               children: [
                                 Text(
-                                  viewModel.userInfo?.username ?? '정주영',
+                                  viewModel.userInfo?.username ?? '로딩중입니다 띠리리..',
                                   style: const TextStyle(
                                     fontFamily: 'Pretendard',
                                     color: Colors.white,
@@ -97,7 +98,7 @@ class _Test6State extends State<Test6> {
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: () {
-                                    print("설정 버튼 클릭");
+                                    context.go('/mypage/edit');
                                   },
                                   child: Container(
                                     width: 32,
@@ -262,13 +263,52 @@ class _Test6State extends State<Test6> {
                         ),
                       ),
                       const CurationLogCarousel(),
+// Test6 클래스의 build 메서드 내 Column 부분 수정
                       Padding(
                         padding: const EdgeInsets.only(bottom: 24),
                         child: Column(
-                          children: viewModel.userFeeds.map((feed) {
+                          children: viewModel.userFeeds.isEmpty
+                              ? [
+                            const SizedBox(height: 24), // 상단 여백 추가
+                            const Icon(
+                              Icons.info_outline,
+                              size: 48,
+                              color: Color(0xff888888),
+                            ),
+                            const SizedBox(height: 8), // 아이콘과 텍스트 간격
+                            const Text(
+                              '아직 등록된 피드가 없습니다.',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff888888),
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 8), // 텍스트와 버튼 간격
+                            TextButton(
+                              onPressed: () {
+                                context.go('/community');
+                                print('피드 추가 버튼 클릭');
+                              },
+                              child: const Text(
+                                '피드 추가하기',
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xff3D3D3D),
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ]
+                              : viewModel.userFeeds.map((feed) {
                             final dateFormat = DateFormat('yyyy.MM.dd');
                             return CurationCard(
-                              imagePath:'assets/image/cat.png',
+                              imagePath: 'assets/image/cat.png',
                               title: feed.title,
                               description: feed.content,
                               likeCount: feed.sumLike,

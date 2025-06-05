@@ -160,10 +160,7 @@ class _stateMyPageScreen extends State<MyPageScreen>
                                               Spacer(),
                                               TextButton(
                                                 onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => ProfileEditScreen()),
-                                                  );
+                                                  context.go('/mypage/edit');
                                                 },
 
                                                 style: TextButton.styleFrom(

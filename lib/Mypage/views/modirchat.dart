@@ -249,7 +249,7 @@ class _ChatBoxState extends State<ChatBox> {
       messages.add({'text': option, 'isMine': true});
       awaitingConfirmation = true; // 확인 대기 상태로 전환
       messages.add({
-        'text': '혹시 잘못 선택하셨나요? \n다시 고르고 싶다면 아래의 버튼을 눌러주세요',
+        'text': '원하시는 카테고리가 맞다면 /를\n입력하여 원하시는 큐레이션을 골라주세요',
         'isMine': false,
         'type': 'confirmation',
       });

@@ -4,6 +4,7 @@ import '../Auth/views/AgreePage.dart';
 import '../Auth/views/LoginSelectionScreen.dart';
 import '../Auth/views/SignUppage.dart';
 import '../Curation/curation.dart';
+import '../Mypage/views/ProfileEditScreen.dart';
 import '../feed/views/MapScreen.dart';
 import '../Mypage/views/Mypage.dart';
 import '../Mypage/views/SettingScreen.dart';
@@ -102,6 +103,10 @@ final GoRouter router = GoRouter(
               path: 'LikedFeed',
               pageBuilder: (context, state) => MaterialPage(child: LikedFeedScreen()),
             ),
+            GoRoute(
+              path: 'edit',
+              pageBuilder: (context, state) => MaterialPage(child: ProfileEditScreen()),
+            ), // 새로운 경로 추가
           ],
         ),
       ],
