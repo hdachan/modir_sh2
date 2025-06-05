@@ -354,8 +354,8 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
                   // 대표 이미지
                   if (feed.picUrl != null)
                     Container(
-                      width: double.infinity,
-                      height: 200,
+                      //width: double.infinity,
+                      height: 600,
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
@@ -494,22 +494,6 @@ PreferredSizeWidget customAppBar(
               Row(
                 children: [
                   ...actions,
-                  if (onCompletePressed != () {})
-                    GestureDetector(
-                      onTap: onCompletePressed,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          "완료",
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: completeButtonColor,
-                          ),
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ],
