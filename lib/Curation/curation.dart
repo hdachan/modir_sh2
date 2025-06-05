@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:intl/intl.dart'; // 날짜 포맷팅을 위해 추가
 import 'CurationCard.dart';
 import 'CurationLogCarousel.dart';
 import 'ViewModel/Test6ViewModel.dart';
 import 'curationwidget.dart';
-
 
 bool isExpanded = false;
 
@@ -22,7 +22,6 @@ class _Test6State extends State<Test6> {
   @override
   void initState() {
     super.initState();
-    // 실제 사용자 UUID 가져오기
     final userId = Supabase.instance.client.auth.currentUser?.id ?? 'example-uuid';
     context.read<Test6ViewModel>().fetchUserData(userId);
   }
@@ -157,9 +156,9 @@ class _Test6State extends State<Test6> {
                                   ),
                                 ),
                                 const SizedBox(width: 2),
-                                const Text(
-                                  '3개',
-                                  style: TextStyle(
+                                Text(
+                                  '${viewModel.postCount ?? 0}개',
+                                  style: const TextStyle(
                                     color: Color(0xff888888),
                                     fontFamily: 'Pretendard',
                                     fontSize: 10,
@@ -191,7 +190,7 @@ class _Test6State extends State<Test6> {
                                 ),
                                 const SizedBox(width: 2),
                                 Text(
-                                  '${viewModel.likeCount ?? 36}개',
+                                  '${viewModel.likeCount ?? 0}개',
                                   style: const TextStyle(
                                     color: Color(0xff888888),
                                     fontFamily: 'Pretendard',
@@ -266,46 +265,17 @@ class _Test6State extends State<Test6> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 24),
                         child: Column(
-                          children: const [
-                            CurationCard(
-                              imagePath: 'assets/image/cat.png',
-                              title:
-                              '말보다 더 깊게 스며드는 위로가 있다면,\n아마 그건 달콤함일 거예요 맛있는 디저트 카페',
-                              description:
-                              '“힘들었지? 고생 많았어.”\n누군가의 따뜻한 말 한마디가 위로가 되기도 하지만, 가끔은 입안 가득 퍼지는 달콤함이 더 깊고 부드럽게 마음을 어우만져줄 때가 있어요.',
-                              likeCount: 12,
-                              commentCount: 14,
-                              viewCount: 16,
-                              date: '2025.02.14',
-                            ),
-                            CurationCard(
-                              imagePath: 'assets/image/cat.png',
-                              title: '그지 같네',
-                              description: '살려다오',
-                              likeCount: 12,
-                              commentCount: 14,
-                              viewCount: 16,
-                              date: '2025.02.14',
-                            ),
-                            CurationCard(
-                              imagePath: 'assets/image/cat.png',
-                              title: '그냥 쉽지 않음',
-                              description: '아파양!!!',
-                              likeCount: 12,
-                              commentCount: 14,
-                              viewCount: 16,
-                              date: '2025.02.14',
-                            ),
-                            CurationCard(
-                              imagePath: 'assets/image/cat.png',
-                              title: '아 ㅋㅋ',
-                              description: '개추좀',
-                              likeCount: 12,
-                              commentCount: 14,
-                              viewCount: 16,
-                              date: '2025.02.14',
-                            ),
-                          ],
+                          children: viewModel.userFeeds.map((feed) {
+                            final dateFormat = DateFormat('yyyy.MM.dd');
+                            return CurationCard(
+                              imagePath:'assets/image/cat.png',
+                              title: feed.title,
+                              description: feed.content,
+                              likeCount: feed.sumLike,
+                              viewCount: feed.hits,
+                              date: dateFormat.format(feed.createdAt),
+                            );
+                          }).toList(),
                         ),
                       ),
                     ],

@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../feed/models/Feedmodel.dart';
 import '../models/user_info.dart';
 
 class UserService {
@@ -44,6 +45,57 @@ class UserService {
       return likeResponse.count;
     } catch (e) {
       throw Exception('Error fetching user post like count: $e');
+    }
+  }
+  // 게시물 개수
+  Future<int> fetchUserPostCount(String userId) async {
+    try {
+      final response = await _supabase
+          .from('feed')
+          .select()
+          .eq('user_id', userId)
+          .count(CountOption.exact);
+
+      return response.count;
+    } catch (e) {
+      throw Exception('사용자 게시물 수를 가져오는 중 오류 발생: $e');
+    }
+  }
+
+
+  // 게시물 가져오기
+  Future<List<Feed>> fetchUserFeeds(String userId) async {
+    try {
+      final response = await _supabase
+          .from('feed')
+          .select('''
+          feed_id, user_id, title, content, created_at, hits, status,
+          userinfo: user_id (username),
+          pic (pic_url),
+          feed_like (user_id),
+          sum_like: feed_like!feed_id (count)
+        ''')
+          .eq('user_id', userId)
+          .eq('status', 0)
+          .order('created_at', ascending: false);
+
+      return response.map((json) {
+        final username = json['userinfo']['username'] ?? 'Unknown';
+        final liked = userId != null &&
+            json['feed_like'] != null &&
+            (json['feed_like'] as List).any((like) => like['user_id'] == userId);
+        final sumLike = json['sum_like'] != null ? json['sum_like'][0]['count'] : 0;
+
+        return Feed.fromJson({
+          ...json,
+          'username': username,
+          'liked': liked,
+          'sum_like': sumLike,
+        });
+      }).toList();
+    } catch (e) {
+      print('Error fetching user feeds: $e');
+      return [];
     }
   }
 }

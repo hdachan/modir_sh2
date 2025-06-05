@@ -34,76 +34,76 @@ class CurationLogCard1 extends StatelessWidget {
     );
   }
 }
-
-class CurationLogCard2 extends StatelessWidget {
-  const CurationLogCard2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return _CurationLogCardWrapper(
-      title: '큐레이션 분석',
-      subtitle: Row(
-        children: const [
-          Text('주 연령', style: _grayTextStyle),
-          SizedBox(width: 2),
-          Text('18', style: _grayTextStyle),
-          SizedBox(width: 2),
-          Text('-', style: _grayTextStyle),
-          SizedBox(width: 2),
-          Text('25', style: _grayTextStyle),
-          SizedBox(width: 2),
-          Text('세', style: _grayTextStyle),
-        ],
-      ),
-      content: Row(
-        children: const [
-          Icon(Icons.person_outline, size: 12, color: Color(0xff888888)),
-          SizedBox(width: 2),
-          Text('여성', style: _grayBoldTextStyle),
-          SizedBox(width: 2),
-          Text('85%', style: _blackBoldTextStyle),
-          SizedBox(width: 2),
-          Text('남성', style: _grayBoldTextStyle),
-          SizedBox(width: 2),
-          Text('15%', style: _grayBoldTextStyle),
-        ],
-      ),
-    );
-  }
-}
-
-class CurationLogCard3 extends StatelessWidget {
-  const CurationLogCard3({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return _CurationLogCardWrapper(
-      title: '내 큐레이션 키워드',
-      subtitle: Row(
-        children: const [
-          Text('키워드', style: _grayTextStyle),
-          SizedBox(width: 2),
-          Text(':', style: _grayTextStyle),
-          SizedBox(width: 2),
-          Text('영화', style: _grayTextStyle),
-        ],
-      ),
-      content: Row(
-        children: const [
-          Icon(Icons.search, size: 12, color: Color(0xff888888)),
-          SizedBox(width: 2),
-          Text('검색어', style: _grayBoldTextStyle),
-          SizedBox(width: 2),
-          Text('영화추천,', style: _blackBoldTextStyle),
-          SizedBox(width: 2),
-          Text('재밌는 영화,', style: _blackBoldTextStyle),
-          SizedBox(width: 2),
-          Text('혼자보기 좋은 영화', style: _blackBoldTextStyle),
-        ],
-      ),
-    );
-  }
-}
+//
+// class CurationLogCard2 extends StatelessWidget {
+//   const CurationLogCard2({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return _CurationLogCardWrapper(
+//       title: '큐레이션 분석',
+//       subtitle: Row(
+//         children: const [
+//           Text('주 연령', style: _grayTextStyle),
+//           SizedBox(width: 2),
+//           Text('18', style: _grayTextStyle),
+//           SizedBox(width: 2),
+//           Text('-', style: _grayTextStyle),
+//           SizedBox(width: 2),
+//           Text('25', style: _grayTextStyle),
+//           SizedBox(width: 2),
+//           Text('세', style: _grayTextStyle),
+//         ],
+//       ),
+//       content: Row(
+//         children: const [
+//           Icon(Icons.person_outline, size: 12, color: Color(0xff888888)),
+//           SizedBox(width: 2),
+//           Text('여성', style: _grayBoldTextStyle),
+//           SizedBox(width: 2),
+//           Text('85%', style: _blackBoldTextStyle),
+//           SizedBox(width: 2),
+//           Text('남성', style: _grayBoldTextStyle),
+//           SizedBox(width: 2),
+//           Text('15%', style: _grayBoldTextStyle),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// class CurationLogCard3 extends StatelessWidget {
+//   const CurationLogCard3({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return _CurationLogCardWrapper(
+//       title: '내 큐레이션 키워드',
+//       subtitle: Row(
+//         children: const [
+//           Text('키워드', style: _grayTextStyle),
+//           SizedBox(width: 2),
+//           Text(':', style: _grayTextStyle),
+//           SizedBox(width: 2),
+//           Text('영화', style: _grayTextStyle),
+//         ],
+//       ),
+//       content: Row(
+//         children: const [
+//           Icon(Icons.search, size: 12, color: Color(0xff888888)),
+//           SizedBox(width: 2),
+//           Text('검색어', style: _grayBoldTextStyle),
+//           SizedBox(width: 2),
+//           Text('영화추천,', style: _blackBoldTextStyle),
+//           SizedBox(width: 2),
+//           Text('재밌는 영화,', style: _blackBoldTextStyle),
+//           SizedBox(width: 2),
+//           Text('혼자보기 좋은 영화', style: _blackBoldTextStyle),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 /// 공통 Wrapper 위젯
 class _CurationLogCardWrapper extends StatelessWidget {

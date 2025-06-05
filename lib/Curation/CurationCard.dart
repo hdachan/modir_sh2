@@ -5,7 +5,6 @@ class CurationCard extends StatelessWidget {
   final String title;
   final String description;
   final int likeCount;
-  final int commentCount;
   final int viewCount;
   final String date;
 
@@ -15,7 +14,6 @@ class CurationCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.likeCount,
-    required this.commentCount,
     required this.viewCount,
     required this.date,
   });
@@ -81,7 +79,6 @@ class CurationCard extends StatelessWidget {
               Row(
                 children: [
                   StatIndicator(icon: Icons.favorite_border, count: likeCount),
-                  StatIndicator(icon: Icons.chat_bubble_outline, count: commentCount),
                   StatIndicator(icon: Icons.visibility_outlined, count: viewCount),
                   const Spacer(),
                   Text(

@@ -29,30 +29,30 @@ class _CurationLogCarouselState extends State<CurationLogCarousel> {
               },
               children: const [
                 CurationLogCard1(),
-                CurationLogCard2(),
-                CurationLogCard3(),
+                // CurationLogCard2(),
+                // CurationLogCard3(),
               ],
             ),
           ),
           const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(3, (index) {
-              final isActive = currentPage == index;
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  width: isActive ? 12 : 4,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: isActive ? const Color(0xff3D3D3D) : const Color(0xffE7E7E7),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-              );
-            }),
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: List.generate(3, (index) {
+          //     final isActive = currentPage == index;
+          //     return Padding(
+          //       padding: const EdgeInsets.symmetric(horizontal: 4),
+          //       child: AnimatedContainer(
+          //         duration: const Duration(milliseconds: 200),
+          //         width: isActive ? 12 : 4,
+          //         height: 4,
+          //         decoration: BoxDecoration(
+          //           color: isActive ? const Color(0xff3D3D3D) : const Color(0xffE7E7E7),
+          //           borderRadius: BorderRadius.circular(100),
+          //         ),
+          //       ),
+          //     );
+          //   }),
+          // ),
         ],
       ),
     );
