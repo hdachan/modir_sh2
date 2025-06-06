@@ -5,6 +5,7 @@ import '../Auth/views/LoginSelectionScreen.dart';
 import '../Auth/views/SignUppage.dart';
 import '../Curation/curation.dart';
 import '../Mypage/views/ProfileEditScreen.dart';
+import '../Mypage/views/notice.dart';
 import '../feed/views/MapScreen.dart';
 import '../Mypage/views/Mypage.dart';
 import '../Mypage/views/SettingScreen.dart';
@@ -41,6 +42,10 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/notice',
+      builder: (context, state) => NoticeBoard(), // 위에서 만든 NoticeBoard 위젯
     ),
     ShellRoute(
       builder: (context, state, child) => BottomNavScreen(child: child),

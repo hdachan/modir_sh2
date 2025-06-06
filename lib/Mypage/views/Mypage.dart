@@ -4,9 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../widget/Mypage_widget.dart';
+import '../widget/Mypage_widget.dart';
 import '../viewmodels/ProfileViewModel.dart';
-import 'ProfileEditScreen.dart';
 
 
 class MyPageScreen extends StatefulWidget {
@@ -194,34 +193,36 @@ class _stateMyPageScreen extends State<MyPageScreen>
                                           ),
                                         ),
                                         SizedBox(height: 4),
-                                        Container(
-                                          height: 16,
-                                          child:Row(
-                                            children: [
-                                              Text(
-                                                '큐레이션 로그 알아보기',
-                                                style: TextStyle(
-                                                  color: const Color(0xFF888888),
-                                                  fontSize: 12,
-                                                  fontFamily: 'Pretendard',
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.30,
-                                                  letterSpacing: -0.30,
+                                        InkWell(
+                                          onTap: () {
+                                            context.go('/map'); // 페이지 이동
+                                          },
+                                          child: Container(
+                                            height: 16,
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '큐레이션 로그 알아보기',
+                                                  style: TextStyle(
+                                                    color: const Color(0xFF888888),
+                                                    fontSize: 12,
+                                                    fontFamily: 'Pretendard',
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.30,
+                                                    letterSpacing: -0.30,
+                                                  ),
                                                 ),
-                                              ),
-                                              SizedBox(width: 2),
-                                              Container(
-                                                width: 20,
-                                                height: 20,
-                                                child: Icon(
-                                                  Icons.arrow_forward_ios, // 원하는 화살표 아이콘 (예: arrow_forward)
-                                                  size: 12, // 아이콘 크기 조정 (Container 크기에 맞게)
+                                                SizedBox(width: 2),
+                                                Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  size: 12,
                                                   color: const Color(0xFF888888),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
+
                                       ],
                                     ),
                                   ),
@@ -254,6 +255,7 @@ class _stateMyPageScreen extends State<MyPageScreen>
                       customButton(
                         '공지사항',
                             () {
+                          context.push('/notice'); // push ,go 차이는 push는 스택에 쌓이고 go는 안쌓임
                         },
                       ),
                       customButton(

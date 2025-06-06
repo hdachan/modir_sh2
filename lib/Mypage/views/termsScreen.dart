@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widget/Mypage_widget.dart';
+import '../widget/Mypage_widget.dart';
 import '../../widget/agree_widget.dart';
 
 

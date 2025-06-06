@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../widget/Mypage_widget.dart';
+import '../../Mypage/widget/Mypage_widget.dart';
 import '../../widget/login_field.dart';
 import '../../widget/login_widget.dart';
 import '../Service/InformationService.dart';

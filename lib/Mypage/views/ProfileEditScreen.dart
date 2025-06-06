@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../widget/login_widget.dart';
 import '../viewmodels/ProfileViewModel.dart';
@@ -8,129 +9,134 @@ class ProfileEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ProfileViewModel()..fetchUserInfo(),
-      child: Consumer<ProfileViewModel>(
-        builder: (context, viewModel, child) {
-          final isFormValid = viewModel.nicknameController.text.isNotEmpty &&
-              viewModel.birthdateController.text.isNotEmpty &&
-              viewModel.selectedGenderIndex != -1 &&
-              viewModel.categoryController.text.isNotEmpty;
+    return Consumer<ProfileViewModel>(
+      builder: (context, viewModel, child) {
+        final isFormValid = viewModel.nicknameController.text.isNotEmpty &&
+            viewModel.birthdateController.text.isNotEmpty &&
+            viewModel.selectedGenderIndex != -1 &&
+            viewModel.categoryController.text.isNotEmpty;
 
-          return Scaffold(
-            resizeToAvoidBottomInset: true, // 키보드 활성화 시 화면 조정
-            appBar: emailAppBar(
-              context,
-              "모디랑 회원가입",
-              const Color(0xFF000000),
-                  () => print('완료 버튼 눌림'),
-            ),
-            body: viewModel.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : ScrollConfiguration(
-              behavior: const ScrollBehavior().copyWith(scrollbars: false), // 스크롤바 숨김
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                clipBehavior: Clip.none,
-                child: Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 600),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16), // 상하 패딩 추가
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 104,
-                            child: Center(
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      height: 80,
-                                      decoration: ShapeDecoration(
-                                        color: const Color(0xFF888888),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                      ),
+        return Scaffold(
+          resizeToAvoidBottomInset: true,
+          appBar: emailAppBar(
+            context,
+            "모디랑 회원가입",
+            const Color(0xFF000000),
+                () => print('완료 버튼 눌림'),
+          ),
+          body: viewModel.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : ScrollConfiguration(
+            behavior: const ScrollBehavior().copyWith(scrollbars: false),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              clipBehavior: Clip.none,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 600),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 104,
+                          child: Center(
+                            child: Stack(
+                              children: [
+                                Container(
+                                  width: 80,
+                                  height: 80,
+                                  decoration: ShapeDecoration(
+                                    color: const Color(0xFF888888),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
-                                    Positioned(
-                                      right: 0,
-                                      bottom: 0,
-                                      child: Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFE7E7E7),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: const Icon(
-                                          Icons.camera_alt,
-                                          size: 16,
-                                          color: Colors.black,
-                                        ),
-                                      ),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFE7E7E7),
+                                      shape: BoxShape.circle,
                                     ),
-                                  ],
-                                )),
-                          ),
-                          const SizedBox(height: 24),
-                          buildLabel("닉네임"),
-                          buildInput(viewModel.nicknameController, "모디랑"),
-                          const SizedBox(height: 8),
-                          const Text(
-                            '닉네임은 한영문자 포함 특수문자 _만 사용가능합니다',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Pretendard',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              height: 1.4,
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      size: 16,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-
-                          const SizedBox(height: 32),
-                          buildLabel("생년월일"),
-                          buildInput(viewModel.birthdateController, "20000101", isNumber: true),
-                          const SizedBox(height: 32),
-                          buildLabel("성별"),
-                          Row(
-                            children: [
-                              GenderButton(
-                                label: '남자',
-                                isSelected: viewModel.selectedGenderIndex == 0,
-                                onTap: () => viewModel.onGenderButtonPressed(0),
-                              ),
-                              const SizedBox(width: 16),
-                              GenderButton(
-                                label: '여자',
-                                isSelected: viewModel.selectedGenderIndex == 1,
-                                onTap: () => viewModel.onGenderButtonPressed(1),
-                              ),
-                            ],
+                        ),
+                        const SizedBox(height: 24),
+                        buildLabel("닉네임"),
+                        buildInput(viewModel.nicknameController, "모디랑"),
+                        const SizedBox(height: 8),
+                        const Text(
+                          '닉네임은 한영문자 포함 특수문자 _만 사용가능합니다',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Pretendard',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
                           ),
-                          const SizedBox(height: 32),
-                          buildLabel("소개글"),
-                          buildInput(viewModel.categoryController, "소개글을 입력하세요"),
-                          const SizedBox(height: 16), // 하단 여백 추가
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 32),
+                        buildLabel("생년월일"),
+                        buildInput(viewModel.birthdateController, "20000101", isNumber: true),
+                        const SizedBox(height: 32),
+                        buildLabel("성별"),
+                        Row(
+                          children: [
+                            GenderButton(
+                              label: '남자',
+                              isSelected: viewModel.selectedGenderIndex == 0,
+                              onTap: () => viewModel.onGenderButtonPressed(0),
+                            ),
+                            const SizedBox(width: 16),
+                            GenderButton(
+                              label: '여자',
+                              isSelected: viewModel.selectedGenderIndex == 1,
+                              onTap: () => viewModel.onGenderButtonPressed(1),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 32),
+                        buildLabel("소개글"),
+                        buildInput(viewModel.categoryController, "소개글을 입력하세요"),
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-            bottomNavigationBar: bottomBar(isFormValid, () async {
-              await viewModel.updateUserInfo();
-            }),
-            backgroundColor: Colors.white,
-          );
-        },
-      ),
+          ),
+          bottomNavigationBar: bottomBar(isFormValid, () async {
+            await viewModel.updateUserInfo();
+            if (viewModel.errorMessage == null) {
+              context.go("/mypage");
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(viewModel.errorMessage!)),
+              );
+            }
+          }),
+          backgroundColor: Colors.white,
+        );
+      },
     );
   }
 
+  // buildLabel, buildInput, bottomBar, GenderButton은 기존 코드 유지
   static Widget buildLabel(String text) => Text(
     text,
     style: const TextStyle(
@@ -200,7 +206,7 @@ class ProfileEditScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        "다음",
+                        "완료",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: isEnabled
@@ -223,7 +229,6 @@ class ProfileEditScreen extends StatelessWidget {
   }
 }
 
-// 성별 버튼 위젯
 class GenderButton extends StatelessWidget {
   final String label;
   final bool isSelected;
