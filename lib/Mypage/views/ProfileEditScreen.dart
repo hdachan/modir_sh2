@@ -39,43 +39,44 @@ class ProfileEditScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 104,
-                          child: Center(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: 80,
-                                  height: 80,
-                                  decoration: ShapeDecoration(
-                                    color: const Color(0xFF888888),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFFE7E7E7),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(
-                                      Icons.camera_alt,
-                                      size: 16,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
+                        /// 프로필 사진 추가하기 ( 미완 )
+                        // Container(
+                        //   height: 104,
+                        //   child: Center(
+                        //     child: Stack(
+                        //       children: [
+                        //         Container(
+                        //           width: 80,
+                        //           height: 80,
+                        //           decoration: ShapeDecoration(
+                        //             color: const Color(0xFF888888),
+                        //             shape: RoundedRectangleBorder(
+                        //               borderRadius: BorderRadius.circular(8),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         Positioned(
+                        //           right: 0,
+                        //           bottom: 0,
+                        //           child: Container(
+                        //             width: 24,
+                        //             height: 24,
+                        //             decoration: BoxDecoration(
+                        //               color: const Color(0xFFE7E7E7),
+                        //               shape: BoxShape.circle,
+                        //             ),
+                        //             child: const Icon(
+                        //               Icons.camera_alt,
+                        //               size: 16,
+                        //               color: Colors.black,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        //const SizedBox(height: 24),
                         buildLabel("닉네임"),
                         buildInput(viewModel.nicknameController, "모디랑"),
                         const SizedBox(height: 8),
@@ -201,7 +202,7 @@ class ProfileEditScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: isEnabled
-                            ? const Color(0xFF05FFF7)
+                            ? const Color(0xFF3D3D3D)
                             : const Color(0xFF888888),
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -210,7 +211,7 @@ class ProfileEditScreen extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: isEnabled
-                              ? const Color(0xFF1A1A1A)
+                              ? Colors.white
                               : const Color(0xFF3D3D3D),
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
@@ -251,7 +252,7 @@ class GenderButton extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: isSelected
-                  ? const Color(0xFF05FFF7)
+                  ? const Color(0xFF3D3D3D)
                   : const Color(0xFFF0F0F0),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -263,7 +264,7 @@ class GenderButton extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: isSelected
-                    ? const Color(0xFF1A1A1A)
+                    ? Colors.white
                     : const Color(0xFF888888),
               ),
             ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../widget/feed_widget.dart';
+import '../widget/feed_widget.dart';
 import '../viewmodels/FeedViewModel.dart';
 import '../models/Feedmodel.dart';
 import 'LikedFeedScreen.dart';
@@ -31,7 +31,7 @@ class FeedScreen extends StatelessWidget {
                 body: Column(
                   children: [
                     customAppBar(),
-                    customBodyBar(context, "공지"),
+                    customBodyBar(context, "모디랑 커뮤니티 이용수칙 안내"),
                     Container(
                       height: 40,
                       padding: const EdgeInsets.only(left: 16, right: 16),

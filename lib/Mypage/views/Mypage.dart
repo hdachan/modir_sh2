@@ -55,29 +55,29 @@ class _stateMyPageScreen extends State<MyPageScreen>
                             ),
                             const Spacer(),
                             // 돋보기 아이콘
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: GestureDetector(
-                                onTap: () => print("돋보기 버튼 클릭"),
-                                child: const Icon(
-                                  Icons.search_rounded,
-                                  size: 24,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                            // 종 아이콘
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: GestureDetector(
-                                onTap: () => print("종 버튼 클릭"),
-                                child: const Icon(
-                                  Icons.notifications_outlined,
-                                  size: 24,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 16),
+                            //   child: GestureDetector(
+                            //     onTap: () => print("돋보기 버튼 클릭"),
+                            //     child: const Icon(
+                            //       Icons.search_rounded,
+                            //       size: 24,
+                            //       color: Colors.black,
+                            //     ),
+                            //   ),
+                            // ),
+                            /// 종 아이콘 ( 임시 사용 안함 )
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 16),
+                            //   child: GestureDetector(
+                            //     onTap: () => print("종 버튼 클릭"),
+                            //     child: const Icon(
+                            //       Icons.notifications_outlined,
+                            //       size: 24,
+                            //       color: Colors.black,
+                            //     ),
+                            //   ),
+                            // ),
                             // 저장 아이콘
                             Padding(
                               padding: const EdgeInsets.only(right: 16),
@@ -125,6 +125,13 @@ class _stateMyPageScreen extends State<MyPageScreen>
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                   ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Colors.white,
+                                        size: 24,
+                                      ),
+                                    )
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
@@ -272,8 +279,68 @@ class _stateMyPageScreen extends State<MyPageScreen>
                       customButton(
                         '버전',
                             () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                backgroundColor: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.info_outline, color: Colors.black, size: 48),
+                                      SizedBox(height: 16),
+                                      Text(
+                                        '모디랑',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Text(
+                                        '현재 버전: 0.0.1',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.grey[700],
+                                        ),
+                                      ),
+                                      SizedBox(height: 24),
+                                      SizedBox(
+                                        child: TextButton(
+                                          onPressed: () => Navigator.of(context).pop(),
+                                          style: TextButton.styleFrom(
+                                            backgroundColor: Colors.black,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(16),
+                                            ),
+                                            padding: EdgeInsets.symmetric(vertical: 14),
+                                          ),
+                                          child: Text(
+                                            '확인',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         },
-                      ),
+                      )
+
+
                     ],
                   );
                 },
