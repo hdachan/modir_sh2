@@ -24,9 +24,12 @@ class _Test6State extends State<Test6> {
   void initState() {
     super.initState();
     final userId = Supabase.instance.client.auth.currentUser?.id ?? 'example-uuid';
-    context.read<Test6ViewModel>().fetchUserData(userId);
+    print('Current userId: $userId');
+    context.read<Test6ViewModel>().fetchUserData(userId).then((_) {
+      // 강제로 UI 갱신
+      setState(() {});
+    });
   }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<Test6ViewModel>(
