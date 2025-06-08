@@ -96,7 +96,7 @@ class InformationScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          Subtext('카테고리'),
+                          //Subtext('카테고리'),
                           // LayoutBuilder(
                           //   builder: (context, constraints) {
                           //     return buildSelectionButtons(

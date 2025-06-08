@@ -9,13 +9,16 @@ class ProfileEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Consumer 외부에서 viewModel 가져오기
+    final viewModel = Provider.of<ProfileViewModel>(context, listen: false);
+
+    // 화면 진입 시 사용자 정보 로드
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      viewModel.fetchUserInfo();
+    });
+
     return Consumer<ProfileViewModel>(
       builder: (context, viewModel, child) {
-        final isFormValid = viewModel.nicknameController.text.isNotEmpty &&
-            viewModel.birthdateController.text.isNotEmpty &&
-            viewModel.selectedGenderIndex != -1 &&
-            viewModel.categoryController.text.isNotEmpty;
-
         return Scaffold(
           resizeToAvoidBottomInset: true,
           appBar: emailAppBar(
@@ -35,48 +38,11 @@ class ProfileEditScreen extends StatelessWidget {
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        /// 프로필 사진 추가하기 ( 미완 )
-                        // Container(
-                        //   height: 104,
-                        //   child: Center(
-                        //     child: Stack(
-                        //       children: [
-                        //         Container(
-                        //           width: 80,
-                        //           height: 80,
-                        //           decoration: ShapeDecoration(
-                        //             color: const Color(0xFF888888),
-                        //             shape: RoundedRectangleBorder(
-                        //               borderRadius: BorderRadius.circular(8),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //         Positioned(
-                        //           right: 0,
-                        //           bottom: 0,
-                        //           child: Container(
-                        //             width: 24,
-                        //             height: 24,
-                        //             decoration: BoxDecoration(
-                        //               color: const Color(0xFFE7E7E7),
-                        //               shape: BoxShape.circle,
-                        //             ),
-                        //             child: const Icon(
-                        //               Icons.camera_alt,
-                        //               size: 16,
-                        //               color: Colors.black,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-                        //const SizedBox(height: 24),
                         buildLabel("닉네임"),
                         buildInput(viewModel.nicknameController, "모디랑"),
                         const SizedBox(height: 8),
@@ -92,7 +58,9 @@ class ProfileEditScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 32),
                         buildLabel("생년월일"),
-                        buildInput(viewModel.birthdateController, "20000101", isNumber: true),
+                        buildInput(
+                            viewModel.birthdateController, "20000101",
+                            isNumber: true),
                         const SizedBox(height: 32),
                         buildLabel("성별"),
                         Row(
@@ -112,7 +80,8 @@ class ProfileEditScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 32),
                         buildLabel("소개글"),
-                        buildInput(viewModel.categoryController, "소개글을 입력하세요"),
+                        buildInput(
+                            viewModel.categoryController, "소개글을 입력하세요"),
                         const SizedBox(height: 16),
                       ],
                     ),
@@ -121,7 +90,7 @@ class ProfileEditScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: bottomBar(isFormValid, () async {
+          bottomNavigationBar: bottomBar(() async {
             await viewModel.updateUserInfo();
             if (viewModel.errorMessage == null) {
               context.go("/mypage");
@@ -137,7 +106,6 @@ class ProfileEditScreen extends StatelessWidget {
     );
   }
 
-  // buildLabel, buildInput, bottomBar, GenderButton은 기존 코드 유지
   static Widget buildLabel(String text) => Text(
     text,
     style: const TextStyle(
@@ -183,7 +151,7 @@ class ProfileEditScreen extends StatelessWidget {
     );
   }
 
-  Widget bottomBar(bool isEnabled, VoidCallback onPressed) {
+  Widget bottomBar(VoidCallback onPressed) {
     return Container(
       height: 68,
       color: Colors.white,
@@ -197,22 +165,19 @@ class ProfileEditScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: isEnabled ? onPressed : null,
+                    onTap: onPressed,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
-                        color: isEnabled
-                            ? const Color(0xFF3D3D3D)
-                            : const Color(0xFF888888),
+                        color: const Color(0xFF3D3D3D),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
+                      child: const Text(
                         "완료",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
-                          color: isEnabled
-                              ? Colors.white
-                              : const Color(0xFF3D3D3D),
+                          color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
                         ),
@@ -251,10 +216,16 @@ class GenderButton extends StatelessWidget {
           onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
-              color: isSelected
-                  ? const Color(0xFF3D3D3D)
-                  : const Color(0xFFF0F0F0),
-              borderRadius: BorderRadius.circular(8),
+                color: isSelected
+                    ? const Color(0xFF3D3D3D)
+                    : const Color(0xFFF0F0F0),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: isSelected
+                      ? const Color(0xFF3D3D3D)
+                      : const Color(0xFFCCCCCC),
+                  width: 1,
+                ),
             ),
             alignment: Alignment.center,
             child: Text(
@@ -263,9 +234,7 @@ class GenderButton extends StatelessWidget {
                 fontFamily: 'Pretendard',
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: isSelected
-                    ? Colors.white
-                    : const Color(0xFF888888),
+                color: isSelected ? Colors.white : Colors.black,
               ),
             ),
           ),
