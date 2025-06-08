@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../Mypage/views/modirchat.dart';
 import '../viewmodels/FeedViewModel.dart';
 import '../models/Feedmodel.dart';
+import '/Curation/CurationShareSheet.dart';
 
 class FeedDetailScreen extends StatefulWidget {
   final String feedId;
@@ -216,7 +217,9 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                showEmptyBoxBottomSheet(context);
+              },
               child: const Icon(Icons.ios_share, size: 24, color: Colors.black),
             ),
           ),
