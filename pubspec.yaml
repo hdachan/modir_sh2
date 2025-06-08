@@ -65,6 +65,7 @@ flutter:
     - assets/image/advertisement_3.svg
     - assets/image/advertisement_4.svg
     - assets/image/logo_primary.svg
+    - assets/image/mini_logo_white.svg
 
     - assets/image/test_image.png
 
@@ -80,6 +81,8 @@ flutter:
     #- assets/image/QuickShare.png
     - assets/image/bgimage.png
     - assets/image/bgimage.jpg
+    - assets/image/mini_logo_black.png
+    - assets/image/mini_logo_white.png
 
     - assets/icons/QuickShare.png
     - assets/icons/Kakaotalk.png

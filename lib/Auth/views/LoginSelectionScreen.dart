@@ -52,7 +52,7 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                           ),
                           const SizedBox(height: 16),
                           CustomLoginButton(
-                            iconPath: 'assets/image/mini_logo.svg',
+                            iconPath: 'assets/image/mini_logo_white.svg',
                             label: '이메일로 로그인',
                             gradient: const LinearGradient(
                               begin: Alignment(0.00, 0.00),
@@ -63,7 +63,7 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                               width: 1,
                               color: Color(0xFF3D3D3D),
                             ),
-                            textColor: const Color(0xFF05FFF7),
+                            textColor: Colors.white,
                             fontFamily: 'Pretendard',
                             iconSize: 12,
                             onPressed: () {

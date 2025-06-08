@@ -49,7 +49,10 @@ PreferredSizeWidget loginAppBar(
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 16),
-                child: Image.asset('assets/image/logo_primary2.png'),
+                child: Image.asset(
+                  'assets/image/mini_logo_black.png',
+                  width: 28,
+                ),
               ),
             ],
           ),

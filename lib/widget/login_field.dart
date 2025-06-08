@@ -30,7 +30,7 @@ class WelcomeHeader extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: '에서 다양한\n매장 정보를 확인하세요',
+                  text: '에서 다양한\n모든 정보를 확인하세요',
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 24,
