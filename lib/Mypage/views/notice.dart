@@ -51,7 +51,7 @@ class _NoticeBoardState extends State<NoticeBoard> {
                         alignment: Alignment.centerLeft,
                         child: GestureDetector(
                           onTap: () => Navigator.of(context).maybePop(),
-                          child: const Icon(Icons.arrow_back_ios_new, size: 20, color: Colors.black),
+                          child: const Icon(Icons.arrow_back_ios_new, size: 24, color: Colors.black),
                         ),
                       ),
                       GestureDetector(

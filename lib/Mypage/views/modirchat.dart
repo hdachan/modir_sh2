@@ -10,6 +10,7 @@ class Test5 extends StatefulWidget {
   @override
   State<Test5> createState() => _Test5State();
 }
+
 class _Test5State extends State<Test5> {
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _Test5State extends State<Test5> {
         context,
         "모디챗",
         const Color(0xFFFFFFFF),
-            () => print('Complete Pressed'),
+        () => print('Complete Pressed'),
       ),
       body: Center(
         child: ConstrainedBox(
@@ -33,11 +34,11 @@ class _Test5State extends State<Test5> {
 
 // 상단 바 위젯
 PreferredSizeWidget customAppBar(
-    BuildContext context,
-    String title,
-    Color completeButtonColor,
-    VoidCallback onCompletePressed,
-    ) {
+  BuildContext context,
+  String title,
+  Color completeButtonColor,
+  VoidCallback onCompletePressed,
+) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: AppBar(
@@ -52,7 +53,9 @@ PreferredSizeWidget customAppBar(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () => print("뒤로가기"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   child: const Icon(
@@ -139,7 +142,9 @@ class _ChatBoxState extends State<ChatBox> {
 
       final categoryList = response as List<dynamic>;
       setState(() {
-        categoryOptions = categoryList.map((item) => item['category_name'] as String).toList();
+        categoryOptions = categoryList
+            .map((item) => item['category_name'] as String)
+            .toList();
         if (categoryOptions.isNotEmpty && selectedCategory == null) {
           selectedCategory = categoryOptions[0]; // 첫 번째 카테고리 기본 선택
           selectedCategoryId = categoryList[0]['id'] as int;
@@ -225,7 +230,8 @@ class _ChatBoxState extends State<ChatBox> {
 
       final titleList = response as List<dynamic>;
       setState(() {
-        curationTitles = titleList.map((item) => item['title'] as String).toList();
+        curationTitles =
+            titleList.map((item) => item['title'] as String).toList();
       });
     } catch (e) {
       print('Error loading curation titles: $e');
@@ -373,26 +379,31 @@ class _ChatBoxState extends State<ChatBox> {
         Expanded(
           child: Container(
             color: Color(0xFFE7E7E7),
-            padding: const EdgeInsets.only(top: 24, left: 14, right: 14, bottom: 12),
+            padding:
+                const EdgeInsets.only(top: 24, left: 14, right: 14, bottom: 12),
             child: ListView.builder(
               controller: _scrollController,
               itemCount: messages.length,
               itemBuilder: (context, index) {
                 final msg = messages[index];
-                final isFirstOfPartner =
-                    !msg['isMine'] && (index == 0 || messages[index - 1]['isMine']);
+                final isFirstOfPartner = !msg['isMine'] &&
+                    (index == 0 || messages[index - 1]['isMine']);
 
                 return Align(
-                  alignment: msg['isMine'] ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment: msg['isMine']
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: msg['isMine']
                       ? _buildMyMessage(msg['text'])
                       : _buildPartnerMessage(
-                    msg,
-                    isFirstOfPartner,
-                    index,
-                    onSelectOption: _selectOption,
-                    onSelectConfirmation: awaitingConfirmation ? _selectConfirmationOption : null,
-                  ),
+                          msg,
+                          isFirstOfPartner,
+                          index,
+                          onSelectOption: _selectOption,
+                          onSelectConfirmation: awaitingConfirmation
+                              ? _selectConfirmationOption
+                              : null,
+                        ),
                 );
               },
             ),
@@ -481,7 +492,8 @@ class _ChatBoxState extends State<ChatBox> {
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       isDense: true,
                     ),
                   ),
@@ -508,12 +520,12 @@ class _ChatBoxState extends State<ChatBox> {
 
 // 모디 채팅 UX 위젯
 Widget _buildPartnerMessage(
-    Map<String, dynamic> msg,
-    bool isFirst,
-    int index, {
-      required void Function(String option, int messageIndex) onSelectOption,
-      void Function(String option)? onSelectConfirmation,
-    }) {
+  Map<String, dynamic> msg,
+  bool isFirst,
+  int index, {
+  required void Function(String option, int messageIndex) onSelectOption,
+  void Function(String option)? onSelectConfirmation,
+}) {
   String? text;
   bool isImage = false;
   bool isImageList = false;
@@ -582,9 +594,10 @@ Widget _buildPartnerMessage(
             ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 2),
-            padding: (isImage || isImageList || isOptions || isConfirmationOptions)
-                ? EdgeInsets.zero
-                : const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            padding:
+                (isImage || isImageList || isOptions || isConfirmationOptions)
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
@@ -596,119 +609,147 @@ Widget _buildPartnerMessage(
             ),
             child: isImage
                 ? ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                singleImagePath!,
-                width: 140,
-                height: 140,
-                fit: BoxFit.cover,
-              ),
-            )
-                : isImageList
-                ? SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                children: imagePaths!
-                    .map((path) => Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
-                      path,
+                      singleImagePath!,
                       width: 140,
                       height: 140,
                       fit: BoxFit.cover,
                     ),
-                  ),
-                ))
-                    .toList(),
-              ),
-            )
-                : isOptions
-                ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              child: Column(
-                children: options!.asMap().entries.map((entry) {
-                  int idx = entry.key;
-                  String option = entry.value;
-                  return GestureDetector(
-                    onTap: isActive
-                        ? () => onSelectOption(option, index)
-                        : null, // 비활성화 시 클릭 불가
-                    child: Container(
-                      width: 200,
-                      margin: EdgeInsets.only(
-                        bottom: idx < (options?.length ?? 0) - 1 ? 8 : 0,
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: isActive ? Colors.white : Colors.grey[200], // 비활성화 시 회색 배경
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFE7E7E7), width: 1),
-                      ),
-                      child: Text(
-                        option,
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: isActive ? Colors.black : Colors.grey, // 비활성화 시 회색 텍스트
+                  )
+                : isImageList
+                    ? SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: imagePaths!
+                              .map((path) => Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.asset(
+                                        path,
+                                        width: 140,
+                                        height: 140,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
                         ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            )
-                : isConfirmationOptions && onSelectConfirmation != null
-                ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              child: Column(
-                children: options!.asMap().entries.map((entry) {
-                  int idx = entry.key;
-                  String option = entry.value;
-                  return GestureDetector(
-                    onTap: isActive
-                        ? () => onSelectConfirmation(option)
-                        : null, // 비활성화 시 클릭 불가
-                    child: Container(
-                      width: 200,
-                      margin: EdgeInsets.only(
-                        bottom: idx < (options?.length ?? 0) - 1 ? 8 : 0,
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: isActive ? Colors.white : Colors.grey[300], // 비활성화 시 더 진한 회색
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFE7E7E7), width: 1),
-                      ),
-                      child: Opacity(
-                        opacity: isActive ? 1.0 : 0.5, // 비활성화 시 투명도 조정
-                        child: Text(
-                          option,
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: isActive ? Colors.black : Colors.grey[600], // 비활성화 시 회색 텍스트
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            )
-                : Text(
-              text ?? '',
-              style: const TextStyle(
-                fontFamily: 'Pretendard',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
-              ),
-            ),
+                      )
+                    : isOptions
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                            child: Column(
+                              children: options!.asMap().entries.map((entry) {
+                                int idx = entry.key;
+                                String option = entry.value;
+                                return GestureDetector(
+                                  onTap: isActive
+                                      ? () => onSelectOption(option, index)
+                                      : null, // 비활성화 시 클릭 불가
+                                  child: Container(
+                                    width: 200,
+                                    margin: EdgeInsets.only(
+                                      bottom: idx < (options?.length ?? 0) - 1
+                                          ? 8
+                                          : 0,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      color: isActive
+                                          ? Colors.white
+                                          : Colors.grey[200],
+                                      // 비활성화 시 회색 배경
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                          color: const Color(0xFFE7E7E7),
+                                          width: 1),
+                                    ),
+                                    child: Text(
+                                      option,
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: isActive
+                                            ? Colors.black
+                                            : Colors.grey, // 비활성화 시 회색 텍스트
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          )
+                        : isConfirmationOptions && onSelectConfirmation != null
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
+                                child: Column(
+                                  children:
+                                      options!.asMap().entries.map((entry) {
+                                    int idx = entry.key;
+                                    String option = entry.value;
+                                    return GestureDetector(
+                                      onTap: isActive
+                                          ? () => onSelectConfirmation(option)
+                                          : null, // 비활성화 시 클릭 불가
+                                      child: Container(
+                                        width: 200,
+                                        margin: EdgeInsets.only(
+                                          bottom:
+                                              idx < (options?.length ?? 0) - 1
+                                                  ? 8
+                                                  : 0,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 12, horizontal: 16),
+                                        decoration: BoxDecoration(
+                                          color: isActive
+                                              ? Colors.white
+                                              : Colors.grey[300],
+                                          // 비활성화 시 더 진한 회색
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          border: Border.all(
+                                              color: const Color(0xFFE7E7E7),
+                                              width: 1),
+                                        ),
+                                        child: Opacity(
+                                          opacity: isActive
+                                              ? 1.0
+                                              : 0.5, // 비활성화 시 투명도 조정
+                                          child: Text(
+                                            option,
+                                            style: TextStyle(
+                                              fontFamily: 'Pretendard',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: isActive
+                                                  ? Colors.black
+                                                  : Colors.grey[
+                                                      600], // 비활성화 시 회색 텍스트
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                            : Text(
+                                text ?? '',
+                                style: const TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black,
+                                ),
+                              ),
           ),
         ],
       ),

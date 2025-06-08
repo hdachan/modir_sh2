@@ -20,15 +20,10 @@ Widget CustomAppBar({required String title, required BuildContext context}) {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Container(
-                width: 56,
-                height: 56,
-                padding: const EdgeInsets.all(16),
-                child: Icon(
-                  Icons.chevron_left,
-                  size: 24,
-                  color: Colors.black,
-                ),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 24,
+                color: Colors.black,
               ),
             ),
             Container(
@@ -76,7 +71,7 @@ Widget ProfileEditAppBar({required String title, required BuildContext context})
                 height: 56,
                 padding: const EdgeInsets.all(16),
                 child: Icon(
-                  Icons.chevron_left,
+                  Icons.arrow_back_ios_new,
                   size: 24,
                   color: Colors.black,
                 ),
