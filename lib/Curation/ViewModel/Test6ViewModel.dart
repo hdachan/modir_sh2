@@ -3,13 +3,12 @@ import '../../feed/models/Feedmodel.dart';
 import '../Service/user_service.dart';
 import '../models/user_info.dart';
 
-
 class Test6ViewModel extends ChangeNotifier {
   final UserService _userService = UserService();
   UserInfo? userInfo;
   int? likeCount;
   int? postCount;
-  List<Feed> userFeeds = []; // 사용자 게시물 리스트 추가
+  List<Feed> userFeeds = [];
   bool isLoading = false;
   String? errorMessage;
 
@@ -40,13 +39,13 @@ class Test6ViewModel extends ChangeNotifier {
         }),
       ]);
 
-      userInfo = results[0] as UserInfo;
+      userInfo = results[0] as UserInfo?; // null일 수 있음
       likeCount = results[1] as int;
       postCount = results[2] as int;
       userFeeds = results[3] as List<Feed>;
     } catch (e) {
       print('Error in fetchUserData: $e');
-      errorMessage = e.toString();
+      errorMessage = '데이터를 불러오는 중 오류가 발생했습니다.';
     } finally {
       isLoading = false;
       print('fetchUserData completed, isLoading: $isLoading');
