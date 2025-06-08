@@ -97,9 +97,9 @@ class InformationViewModel extends ChangeNotifier {
     if (_selectedGenderIndex == -1) {
       return '성별을 선택해주세요.';
     }
-    if (_selectedCategoryIndex == -1) {
-      return '카테고리를 선택해주세요.';
-    }
+    // if (_selectedCategoryIndex == -1) {
+    //   return '카테고리를 선택해주세요.';
+    // }
     if (!_isNicknameAvailable) {
       return '이미 사용 중인 닉네임입니다.';
     }
@@ -111,7 +111,7 @@ class InformationViewModel extends ChangeNotifier {
         username: _nicknameController.text.trim(),
         birthdate: _birthdateController.text.trim(),
         gender: _selectedGenderIndex == 0,
-        category: _selectedCategoryIndex == 0 ? '빈티지' : '아메카지',
+        category: _selectedCategoryIndex == 0 ? '내 소개' : '내 소개',
       );
 
       if (userId == null) {

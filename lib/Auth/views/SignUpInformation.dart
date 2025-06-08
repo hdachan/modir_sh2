@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../Mypage/widget/Mypage_widget.dart';
 import '../../widget/login_field.dart';
@@ -114,7 +115,7 @@ class InformationScreen extends StatelessWidget {
                                 onTap: () async {
                                   final errorMessage = await viewModel.signUp(email, password);
                                   if (errorMessage == null) {
-                                    print("완벽");
+                                    context.go('/community');
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text(errorMessage)),

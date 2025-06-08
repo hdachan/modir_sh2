@@ -171,21 +171,21 @@ class _Test6State extends State<Test6> {
                           ),
                         ),
                       ),
-                      const Positioned(
+                      Positioned(
                         left: 16,
                         bottom: -18,
-                        child: SizedBox(
+                        child: Container(
                           height: 80,
                           width: 80,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                              image: DecorationImage(
-                                image: AssetImage('assets/image/cat.png'),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
                           ),
+                          child: Icon(
+                            Icons.person_rounded,
+                            size: 60,
+                            color: Colors.white,
+                          )
                         ),
                       ),
                       Positioned(
@@ -342,32 +342,32 @@ class _Test6State extends State<Test6> {
                                     ),
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 0,
-                                  left: 216,
-                                  child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                                      minimumSize: const Size(0, 0),
-                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        isExpanded = !isExpanded;
-                                      });
-                                    },
-                                    child: Text(
-                                      isExpanded ? '접기' : '더 보기',
-                                      style: const TextStyle(
-                                        fontFamily: 'Pretendard',
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xff888888),
-                                        height: 1.4,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // Positioned(
+                                //   bottom: 0,
+                                //   left: 216,
+                                //   child: TextButton(
+                                //     style: TextButton.styleFrom(
+                                //       padding: const EdgeInsets.symmetric(horizontal: 0),
+                                //       minimumSize: const Size(0, 0),
+                                //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                //     ),
+                                //     onPressed: () {
+                                //       setState(() {
+                                //         isExpanded = !isExpanded;
+                                //       });
+                                //     },
+                                //     child: Text(
+                                //       isExpanded ? '접기' : '더 보기',
+                                //       style: const TextStyle(
+                                //         fontFamily: 'Pretendard',
+                                //         fontSize: 10,
+                                //         fontWeight: FontWeight.w500,
+                                //         color: Color(0xff888888),
+                                //         height: 1.4,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ), 더 보기 원할 때 보이기 안돼서 잠시 주석 처리
                               ],
                             ),
                           ),
@@ -420,12 +420,16 @@ class _Test6State extends State<Test6> {
                           : viewModel.userFeeds.map((feed) {
                         final dateFormat = DateFormat('yyyy.MM.dd');
                         return CurationCard(
-                          imagePath: 'assets/image/cat.png',
+                          imagePath: 'assets/image/hide_image.png',
                           title: feed.title,
                           description: feed.content,
                           likeCount: feed.sumLike,
                           viewCount: feed.hits,
                           date: dateFormat.format(feed.createdAt),
+                          onTap: () {
+                            print('카드가 눌렸어요!'); // 여기로 경로 수정
+                            // 원하는 동작 구현
+                          },
                         );
                       }).toList(),
                     ),

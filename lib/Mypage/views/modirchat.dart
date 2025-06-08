@@ -598,6 +598,9 @@ Widget _buildPartnerMessage(
                 (isImage || isImageList || isOptions || isConfirmationOptions)
                     ? EdgeInsets.zero
                     : const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            constraints: const BoxConstraints(
+              maxWidth: 240,
+            ),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
@@ -661,13 +664,10 @@ Widget _buildPartnerMessage(
                                         vertical: 12, horizontal: 16),
                                     decoration: BoxDecoration(
                                       color: isActive
-                                          ? Colors.white
+                                          ? Color(0xffF6F6F6)
                                           : Colors.grey[200],
                                       // 비활성화 시 회색 배경
                                       borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                          color: const Color(0xFFE7E7E7),
-                                          width: 1),
                                     ),
                                     child: Text(
                                       option,
@@ -743,6 +743,7 @@ Widget _buildPartnerMessage(
                               )
                             : Text(
                                 text ?? '',
+                                softWrap: true,
                                 style: const TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontSize: 12,

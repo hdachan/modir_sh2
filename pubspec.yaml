@@ -83,6 +83,7 @@ flutter:
     - assets/image/bgimage.jpg
     - assets/image/mini_logo_black.png
     - assets/image/mini_logo_white.png
+    - assets/image/hide_image.png
 
     - assets/icons/QuickShare.png
     - assets/icons/Kakaotalk.png

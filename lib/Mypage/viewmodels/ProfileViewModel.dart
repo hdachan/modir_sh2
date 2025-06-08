@@ -30,7 +30,7 @@ class ProfileViewModel extends ChangeNotifier {
   void onCategoryButtonPressed(int index) {
     _selectedCategoryIndex = index;
     // 버튼 선택 시 입력 필드와 동기화
-    _categoryController.text = index == 0 ? '빈티지' : (index == 1 ? '아메카지' : '');
+    _categoryController.text = index == 0 ? '내 소개' : (index == 1 ? '내 소개' : '');
     notifyListeners();
   }
 
@@ -53,7 +53,7 @@ class ProfileViewModel extends ChangeNotifier {
       _birthdateController.text = response['birthdate'] ?? '';
       _categoryController.text = response['category'] ?? ''; // 카테고리 로드
       _selectedGenderIndex = response['gender'] == true ? 0 : (response['gender'] == false ? 1 : -1);
-      _selectedCategoryIndex = response['category'] == '빈티지' ? 0 : (response['category'] == '아메카지' ? 1 : -1);
+      _selectedCategoryIndex = response['category'] == '내 소개' ? 0 : (response['category'] == '내 소개' ? 1 : -1);
     } else {
       _errorMessage = '사용자 정보를 찾을 수 없습니다.';
     }
