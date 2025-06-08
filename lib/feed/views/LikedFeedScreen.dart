@@ -206,13 +206,24 @@ class _Card2State extends State<Card2> {
               margin: const EdgeInsets.symmetric(vertical: 6),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                  image: widget.feed.picUrl != null
-                      ? NetworkImage(widget.feed.picUrl!)
-                      : const AssetImage('assets/image/cat.png') as ImageProvider,
-                  fit: BoxFit.cover,
-                ),
               ),
+              child: widget.feed.picUrl != null
+                  ? Image.network(
+                widget.feed.picUrl!,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Icon(
+                  Icons.image_not_supported,
+                  size: 50,
+                  color: Colors.grey,
+                ),
+              )
+                  : Center(
+                    child: const Icon(
+                                    Icons.image_not_supported_outlined,
+                                    size: 24,
+                                    color: Colors.grey,
+                                  ),
+                  ),
             ),
             SizedBox(
               height: 40,

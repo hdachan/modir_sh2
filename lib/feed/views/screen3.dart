@@ -260,63 +260,64 @@ PreferredSizeWidget customAppBar(
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF1C1B1F), size: 24),
                     onPressed: () {
-                      if (controller.text.trim().isEmpty) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                              backgroundColor: const Color(0xFFF0F0F0),
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(maxWidth: 280),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                                      child: Column(
-                                        children: const [
-                                          Text(
-                                            '아직 큐레이션의 내용을 입력하지 않았어요 큐레이션 작성을 취소하시겠어요?',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF000000)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 1),
-                                    SizedBox(
-                                      height: 44,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: TextButton(
-                                              onPressed: () => Navigator.of(context).pop(),
-                                              child: const Text('닫기', style: TextStyle(color: Color(0xFF3D3D3D), fontSize: 14)),
-                                            ),
-                                          ),
-                                          Container(width: 1, color: Color(0xFFE0E0E0)),
-                                          Expanded(
-                                            child: TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text('확인', style: TextStyle(color: Color(0xFF3D3D3D), fontSize: 14)),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      } else {
-                        Navigator.pop(context);
-                      }
+                      Navigator.pop(context);
+                      /// 라우터 설정후 건들기
+                      // if (controller.text.trim().isEmpty) {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return Dialog(
+                      //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      //         backgroundColor: const Color(0xFFF0F0F0),
+                      //         child: ConstrainedBox(
+                      //           constraints: const BoxConstraints(maxWidth: 280),
+                      //           child: Column(
+                      //             mainAxisSize: MainAxisSize.min,
+                      //             children: [
+                      //               Padding(
+                      //                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                      //                 child: Column(
+                      //                   children: const [
+                      //                     Text(
+                      //                       '아직 큐레이션의 내용을 입력하지 않았어요 큐레이션 작성을 취소하시겠어요?',
+                      //                       textAlign: TextAlign.center,
+                      //                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF000000)),
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //               const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 1),
+                      //               SizedBox(
+                      //                 height: 44,
+                      //                 child: Row(
+                      //                   children: [
+                      //                     Expanded(
+                      //                       child: TextButton(
+                      //                         onPressed: () => Navigator.of(context).pop(),
+                      //                         child: const Text('닫기', style: TextStyle(color: Color(0xFF3D3D3D), fontSize: 14)),
+                      //                       ),
+                      //                     ),
+                      //                     Container(width: 1, color: Color(0xFFE0E0E0)),
+                      //                     Expanded(
+                      //                       child: TextButton(
+                      //                         onPressed: () {
+                      //                           Navigator.pop(context);
+                      //                         },
+                      //                         child: const Text('확인', style: TextStyle(color: Color(0xFF3D3D3D), fontSize: 14)),
+                      //                       ),
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //   );
+                      // } else {
+                      //   Navigator.pop(context);
+                      // }
                     },
                   ),
                   Expanded(

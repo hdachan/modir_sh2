@@ -135,20 +135,20 @@ PreferredSizeWidget emailAppBar(
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Color(0xFF000000),
-                      size: 24,
-                    ),
-                  ),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: GestureDetector(
+              //     onTap: () => Navigator.pop(context),
+              //     child: Container(
+              //       padding: const EdgeInsets.all(16),
+              //       child: const Icon(
+              //         Icons.arrow_back_ios_new,
+              //         color: Color(0xFF000000),
+              //         size: 24,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Text(
                 title, // <-- 여기만 바꿨어요!
                 textAlign: TextAlign.center,
