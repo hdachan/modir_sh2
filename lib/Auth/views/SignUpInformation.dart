@@ -97,16 +97,16 @@ class InformationScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 32),
                           Subtext('카테고리'),
-                          LayoutBuilder(
-                            builder: (context, constraints) {
-                              return buildSelectionButtons(
-                                ['빈티지', '아메카지'],
-                                viewModel.selectedCategoryIndex,
-                                viewModel.onCategoryButtonPressed,
-                                constraints,
-                              );
-                            },
-                          ),
+                          // LayoutBuilder(
+                          //   builder: (context, constraints) {
+                          //     return buildSelectionButtons(
+                          //       ['빈티지', '아메카지'],
+                          //       viewModel.selectedCategoryIndex,
+                          //       viewModel.onCategoryButtonPressed,
+                          //       constraints,
+                          //     );
+                          //   },
+                          // ),
                           Consumer<InformationViewModel>(
                             builder: (context, viewModel, child) {
                               return bottomBar(
@@ -136,4 +136,52 @@ class InformationScreen extends StatelessWidget {
       ),
     );
   }
+
+  // buildLabel, buildInput, bottomBar, GenderButton은 기존 코드 유지
+  static Widget buildLabel(String text) => Text(
+    text,
+    style: const TextStyle(
+      color: Colors.black,
+      fontFamily: 'Pretendard',
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+      height: 1.4,
+      letterSpacing: -0.35,
+    ),
+  );
+
+  static Widget buildInput(TextEditingController controller, String hintText,
+      {bool isNumber = false}) {
+    return Container(
+      height: 56,
+      margin: const EdgeInsets.only(top: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF0F0F0),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: TextField(
+        controller: controller,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+        style: const TextStyle(
+          fontFamily: 'Pretendard',
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            fontFamily: 'Pretendard',
+            color: Color(0xFF888888),
+          ),
+          border: InputBorder.none,
+          isDense: true,
+          contentPadding: const EdgeInsets.symmetric(vertical: 20),
+        ),
+      ),
+    );
+  }
 }
+
+

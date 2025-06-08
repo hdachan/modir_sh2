@@ -6,24 +6,29 @@ class UserService {
   final SupabaseClient _supabase = Supabase.instance.client;
 
   // 사용자 정보 가져오기
-  Future<UserInfo> fetchUserInfo(String userId) async {
+  Future<UserInfo?> fetchUserInfo(String userId) async {
     try {
       final response = await _supabase
           .from('userinfo')
           .select()
           .eq('id', userId)
-          .single();
+          .maybeSingle(); // .single() 대신 .maybeSingle() 사용
+
+      if (response == null) {
+        // 데이터가 없으면 null 반환
+        return null;
+      }
 
       return UserInfo.fromJson(response);
     } catch (e) {
-      throw Exception('Error fetching user info: $e');
+      print('Error fetching user info: $e');
+      return null; // 오류 발생 시 null 반환
     }
   }
 
   // 사용자가 작성한 게시물의 좋아요 개수 가져오기
   Future<int> fetchUserPostLikeCount(String userId) async {
     try {
-      // 1. 사용자가 작성한 게시물의 feed_id 목록 가져오기
       final feedResponse = await _supabase
           .from('feed')
           .select('feed_id')
@@ -32,10 +37,9 @@ class UserService {
       final feedIds = feedResponse.map((feed) => feed['feed_id'] as int).toList();
 
       if (feedIds.isEmpty) {
-        return 0; // 사용자가 작성한 게시물이 없으면 좋아요 개수는 0
+        return 0;
       }
 
-      // 2. 해당 feed_id에 대한 좋아요 개수 세기
       final likeResponse = await _supabase
           .from('feed_like')
           .select()
@@ -44,9 +48,11 @@ class UserService {
 
       return likeResponse.count;
     } catch (e) {
-      throw Exception('Error fetching user post like count: $e');
+      print('Error fetching user post like count: $e');
+      return 0; // 오류 시 0 반환
     }
   }
+
   // 게시물 개수
   Future<int> fetchUserPostCount(String userId) async {
     try {
@@ -58,10 +64,10 @@ class UserService {
 
       return response.count;
     } catch (e) {
-      throw Exception('사용자 게시물 수를 가져오는 중 오류 발생: $e');
+      print('Error fetching user post count: $e');
+      return 0;
     }
   }
-
 
   // 게시물 가져오기
   Future<List<Feed>> fetchUserFeeds(String userId) async {
