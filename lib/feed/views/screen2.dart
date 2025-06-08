@@ -58,103 +58,105 @@ class _Screen2State extends State<Screen2> {
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 600),
-            child: AppBar(
-              backgroundColor: const Color(0xFFFFFFFF),
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              titleSpacing: 0,
-              title: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new, size: 24, color: Color(0xFF1C1B1F)),
-                    onPressed: () => context.pop(),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        '모디챗 설정2',
-                        style: const TextStyle(
-                          color: Color(0xFF000000),
-                          fontSize: 14,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 14),
+              child: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                automaticallyImplyLeading: false,
+                titleSpacing: 0,
+                title: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(Icons.arrow_back_ios_new,
+                          color: Colors.black, size: 24),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      "모디챗 설정2",
+                      style: TextStyle(
+                        color: Color(0xFF000000),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        height: 1.4,
+                      ),
+                    ),
+                    // Screen2.dart (_Screen2State의 build 메서드 내 AppBar의 TextButton 부분 수정)
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () async {
+                        if (userId.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('로그인이 필요합니다')),
+                          );
+                          return;
+                        }
+                        if (widget.title == null || widget.title!.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('게시물 제목을 입력해주세요')),
+                          );
+                          return;
+                        }
+                        if (widget.content == null || widget.content!.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('게시물 내용을 입력해주세요')),
+                          );
+                          return;
+                        }
+                        if (widget.categoryItems.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('카테고리를 하나 이상 추가해주세요')),
+                          );
+                          return;
+                        }
+                        if (widget.welcomeItems.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('환영 메시지를 하나 이상 추가해주세요')),
+                          );
+                          return;
+                        }
+                        final hasValidCuration = curationMap.values.any((list) => list.isNotEmpty);
+                        if (!hasValidCuration) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('큐레이션 리스트를 추가해주세요')),
+                          );
+                          return;
+                        }
+                        try {
+                          print('Saving curationMap: $curationMap');
+                          await viewModel.saveAll(
+                            userId: userId,
+                            title: widget.title ?? '',
+                            content: widget.content ?? '',
+                            categoryItems: widget.categoryItems,
+                            welcomeItems: widget.welcomeItems,
+                            curationMap: curationMap,
+                            feedImageBytes: widget.imageBytes,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('저장되었습니다')),
+                          );
+                          context.go('/community');
+                        } catch (e) {
+                          print('Error saving curation: $e');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('저장 실패: $e')),
+                          );
+                        }
+                      },
+                      child: const Text(
+                        '완료',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
-                          height: 1.4,
                         ),
                       ),
                     ),
-                  ),
-                  // Screen2.dart (_Screen2State의 build 메서드 내 AppBar의 TextButton 부분 수정)
-                  TextButton(
-                    onPressed: () async {
-                      if (userId.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('로그인이 필요합니다')),
-                        );
-                        return;
-                      }
-                      // 필수 데이터 검증
-                      if (widget.title == null || widget.title!.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('게시물 제목을 입력해주세요')),
-                        );
-                        return;
-                      }
-                      if (widget.content == null || widget.content!.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('게시물 내용을 입력해주세요')),
-                        );
-                        return;
-                      }
-                      if (widget.categoryItems.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('카테고리를 하나 이상 추가해주세요')),
-                        );
-                        return;
-                      }
-                      if (widget.welcomeItems.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('환영 메시지를 하나 이상 추가해주세요')),
-                        );
-                        return;
-                      }
-                      final hasValidCuration = curationMap.values.any((list) => list.isNotEmpty);
-                      if (!hasValidCuration) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('큐레이션 리스트를 추가해주세요')),
-                        );
-                        return;
-                      }
-                      try {
-                        print('Saving curationMap: $curationMap');
-                        await viewModel.saveAll(
-                          userId: userId,
-                          title: widget.title ?? '',
-                          content: widget.content ?? '',
-                          categoryItems: widget.categoryItems,
-                          welcomeItems: widget.welcomeItems,
-                          curationMap: curationMap,
-                          feedImageBytes: widget.imageBytes,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('저장되었습니다')),
-                        );
-                        context.go('/community');
-                      } catch (e) {
-                        print('Error saving curation: $e');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('저장 실패: $e')),
-                        );
-                      }
-                    },
-                    child: const Text(
-                      '완료',
-                      style: TextStyle(
-                        color: Color(0xFF888888),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
+
+                  ],
+                ),
               ),
             ),
           ),

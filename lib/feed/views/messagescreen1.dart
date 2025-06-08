@@ -120,78 +120,82 @@ class _Test1State extends State<Test1> {
     );
   }
 
-  Widget writeTopBar() {
-    return SafeArea(
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 600),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.arrow_back_ios_new,
-                      color: Color(0xFF1C1B1F), size: 24),
-                ),
-                const Spacer(),
-                const Text(
-                  "모디챗 설정1",
-                  style: TextStyle(
-                    color: Color(0xFF000000),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    height: 1.4,
+  PreferredSizeWidget writeTopBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(56),
+      child: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        titleSpacing: 0,
+        title: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 14),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(Icons.arrow_back_ios_new,
+                        color: Colors.black, size: 24),
                   ),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    final viewModel = Provider.of<Test1ViewModel>(context, listen: false);
-
-                    if (viewModel.welcomeItems.isEmpty || viewModel.categoryItems.isEmpty) {
-                      // Snackbar 표시
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('환영 메시지와 카테고리를 모두 하나 이상 입력해주세요.'),
-                          duration: Duration(seconds: 2),
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.redAccent,
-                        ),
-                      );
-                      return;
-                    }
-
-                    // 정상 이동
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Screen2(
-                          title: widget.title,
-                          content: widget.content,
-                          imageBytes: widget.imageBytes,
-                          categoryItems: viewModel.categoryItems,
-                          welcomeItems: viewModel.welcomeItems,
-                        ),
-                      ),
-                    );
-                  },
-
-
-                  child: const Text(
-                    "다음",
+                  const Spacer(),
+                  const Text(
+                    "모디챗 설정1",
                     style: TextStyle(
-                      color: Color(0xFF888888),
-                      fontSize: 12,
+                      color: Color(0xFF000000),
+                      fontSize: 14,
                       fontWeight: FontWeight.w500,
+                      height: 1.4,
                     ),
                   ),
-                ),
-              ],
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      final viewModel = Provider.of<Test1ViewModel>(context, listen: false);
+
+                      if (viewModel.welcomeItems.isEmpty || viewModel.categoryItems.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('환영 메시지와 카테고리를 모두 하나 이상 입력해주세요.'),
+                            duration: Duration(seconds: 2),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.redAccent,
+                          ),
+                        );
+                        return;
+                      }
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => Screen2(
+                            title: widget.title,
+                            content: widget.content,
+                            imageBytes: widget.imageBytes,
+                            categoryItems: viewModel.categoryItems,
+                            welcomeItems: viewModel.welcomeItems,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "다음",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
 }

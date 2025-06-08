@@ -55,7 +55,7 @@ void showEmptyBoxBottomSheet(BuildContext context) {
                   SizedBox(width: 2),
                   buildIconTextButton(
                     imagePath: 'assets/icons/Kakaotalk.png',
-                    label: '정영원, 황대찬, 정주영, 강다은 그리고 누군가',
+                    label: '모디',
                     onPressed: () {
                       print("버튼2");
                     },
@@ -63,7 +63,7 @@ void showEmptyBoxBottomSheet(BuildContext context) {
                   SizedBox(width: 2),
                   buildIconTextButton(
                     imagePath: 'assets/icons/Gmail.png',
-                    label: 'wndud3331@gmail.com',
+                    label: 'test@gmail.com',
                     onPressed: () {
                       print("버튼3");
                     },
@@ -71,7 +71,7 @@ void showEmptyBoxBottomSheet(BuildContext context) {
                   SizedBox(width: 2),
                   buildIconTextButton(
                     imagePath: 'assets/icons/Kakaotalk.png',
-                    label: '황대찬',
+                    label: '석원담',
                     onPressed: () {
                       print("버튼4");
                     },
@@ -79,7 +79,7 @@ void showEmptyBoxBottomSheet(BuildContext context) {
                   SizedBox(width: 2),
                   buildIconTextButton(
                     imagePath: 'assets/icons/Kakaotalk.png',
-                    label: '강다은',
+                    label: '손현준',
                     onPressed: () {
                       print("버튼5");
                     },
