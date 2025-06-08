@@ -8,7 +8,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'messagescreen1.dart';
 
-
 class WriteFeedScreen extends StatefulWidget {
   const WriteFeedScreen({super.key});
 
@@ -19,7 +18,6 @@ class WriteFeedScreen extends StatefulWidget {
 class _WriteFeedScreenState extends State<WriteFeedScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
-  bool _isContentEmpty = true;
   Color _completeButtonColor = const Color(0xFF888888);
   File? _image;
   Uint8List? _webImage;
@@ -33,9 +31,8 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
 
   void _textFieldListener() {
     setState(() {
-      _isContentEmpty = _contentController.text.trim().isEmpty;
       _completeButtonColor = (_titleController.text.trim().isNotEmpty &&
-          _contentController.text.trim().isNotEmpty)
+              _contentController.text.trim().isNotEmpty)
           ? Colors.black
           : const Color(0xFF888888);
     });
@@ -131,7 +128,7 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
         context,
         "글쓰기",
         _completeButtonColor,
-            () => _onCompletePressed(context),
+        () => _onCompletePressed(context),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -144,26 +141,30 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
                   Center(
                     child: Container(
                       height: 248,
-                      padding: const EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 24),
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 16, top: 24, bottom: 24),
                       child: Stack(
                         children: [
                           Container(
                             width: 160,
                             height: 200,
                             decoration: ShapeDecoration(
-                              color: _image == null && _webImage == null ? Colors.redAccent : null,
+                              color: _image == null && _webImage == null
+                                  ? Color(0xff888888)
+                                  : null,
                               image: _image != null
                                   ? DecorationImage(
-                                image: FileImage(_image!),
-                                fit: BoxFit.cover,
-                              )
+                                      image: FileImage(_image!),
+                                      fit: BoxFit.cover,
+                                    )
                                   : _webImage != null
-                                  ? DecorationImage(
-                                image: MemoryImage(_webImage!),
-                                fit: BoxFit.cover,
-                              )
-                                  : null,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                      ? DecorationImage(
+                                          image: MemoryImage(_webImage!),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
                             ),
                           ),
                           Positioned(
@@ -182,7 +183,8 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
                                 ),
                                 child: Transform(
                                   alignment: Alignment.center,
-                                  transform: Matrix4.identity()..scale(-1.0, 1.0),
+                                  transform: Matrix4.identity()
+                                    ..scale(-1.0, 1.0),
                                   child: const Icon(
                                     Icons.add_a_photo_outlined,
                                     size: 20,
@@ -244,7 +246,22 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
                             color: Colors.black,
                           ),
                           decoration: const InputDecoration(
-                            hintText: "내용을 입력해주세요",
+                            hintText: '내용을 입력해주세요\n\n'
+                                '본 게시판의 사용 목적은 패션을 주제로 한 커뮤니티입니다.\n'
+                                '사용 목적이 옳바르지 않은 글을 게시하거나 시도한다면 서비스 사용이\n'
+                                '영구 제한 될 수도 있습니다.\n\n'
+                                '아래에는 이 게시판에 해당되는 핵심 내용에 대한 요약사항이며, 게시물 작성전 커뮤니티\n'
+                                '이용규칙 전문을 반드시 확인하시길 바랍니다.\n\n'
+                                '게시판에서 미리보기로 확인 가능한 텍스트는 첫 줄에 해당되는 텍스트입니다.\n'
+                                '게시판에서 미리보기로 확인 가능한 이미지는 처음 올리는 이미지 한 장입니다.\n\n'
+                                '• 정치·사회 관련 행위 금지\n'
+                                '• 홍보 및 판매 관련 행위 금지\n'
+                                '• 불법촬영물 유통 금지\n'
+                                '• 타인의 권리를 침해하거나 불쾌감을 주는 행위\n'
+                                '• 범죄, 불법 행위 등 법령을 위반하는 행위\n'
+                                '• 욕설, 비하, 차별, 혐오, 자살, 폭력 관련 내용 금지\n'
+                                '• 음란물, 성적, 수치심 유발 금지\n'
+                                '• 스포일러, 공포, 속임, 놀람 유도 금지',
                             hintStyle: TextStyle(
                               fontFamily: 'Pretendard',
                               fontSize: 12,
@@ -252,36 +269,10 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
                               color: Color(0xFF888888),
                             ),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 10),
+                            contentPadding: EdgeInsets.only(
+                                top: 16, left: 16, right: 16, bottom: 10),
                           ),
                         ),
-                        if (_isContentEmpty)
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: const Text(
-                              '본 게시판의 사용 목적은 패션을 주제로 한 커뮤니티입니다.\n'
-                                  '사용 목적이 옳바르지 않은 글을 게시하거나 시도한다면 서비스 사용이\n'
-                                  '영구 제한 될 수도 있습니다.\n\n'
-                                  '아래에는 이 게시판에 해당되는 핵심 내용에 대한 요약사항이며, 게시물 작성전 커뮤니티\n'
-                                  '이용규칙 전문을 반드시 확인하시길 바랍니다.\n\n'
-                                  '게시판에서 미리보기로 확인 가능한 텍스트는 첫 줄에 해당되는 텍스트입니다.\n'
-                                  '게시판에서 미리보기로 확인 가능한 이미지는 처음 올리는 이미지 한 장입니다.\n\n'
-                                  '• 정치·사회 관련 행위 금지\n'
-                                  '• 홍보 및 판매 관련 행위 금지\n'
-                                  '• 불법촬영물 유통 금지\n'
-                                  '• 타인의 권리를 침해하거나 불쾌감을 주는 행위\n'
-                                  '• 범죄, 불법 행위 등 법령을 위반하는 행위\n'
-                                  '• 욕설, 비하, 차별, 혐오, 자살, 폭력 관련 내용 금지\n'
-                                  '• 음란물, 성적, 수치심 유발 금지\n'
-                                  '• 스포일러, 공포, 속임, 놀람 유도 금지',
-                              style: TextStyle(
-                                fontFamily: 'Pretendard',
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF888888),
-                              ),
-                            ),
-                          ),
                       ],
                     ),
                   ),
@@ -296,8 +287,8 @@ class _WriteFeedScreenState extends State<WriteFeedScreen> {
   }
 }
 
-PreferredSizeWidget customAppBar(
-    BuildContext context, String title, Color completeButtonColor, VoidCallback onCompletePressed) {
+PreferredSizeWidget customAppBar(BuildContext context, String title,
+    Color completeButtonColor, VoidCallback onCompletePressed) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: AppBar(

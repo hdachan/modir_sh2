@@ -339,8 +339,6 @@ class _stateMyPageScreen extends State<MyPageScreen>
                           );
                         },
                       )
-
-
                     ],
                   );
                 },

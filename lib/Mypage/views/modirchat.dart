@@ -173,7 +173,7 @@ class _ChatBoxState extends State<ChatBox> {
         return;
       }
 
-      _messageTimer = Timer.periodic(Duration(seconds: 2), (timer) {
+      _messageTimer = Timer.periodic(Duration(seconds: 1), (timer) {
         if (index >= messagesList.length) {
           timer.cancel();
           _addOptionsMessage();

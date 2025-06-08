@@ -81,6 +81,12 @@ flutter:
     - assets/image/bgimage.png
     - assets/image/bgimage.jpg
 
+    - assets/icons/QuickShare.png
+    - assets/icons/Kakaotalk.png
+    - assets/icons/Gmail.png
+    - assets/icons/Instagram.png
+    - assets/icons/Band.png
+
   fonts:
     - family: Pretendard
       fonts:

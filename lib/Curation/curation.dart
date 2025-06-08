@@ -7,6 +7,7 @@ import 'CurationCard.dart';
 import 'CurationLogCarousel.dart';
 import 'ViewModel/Test6ViewModel.dart';
 import 'curationwidget.dart';
+import 'CurationShareSheet.dart';
 
 bool isExpanded = false;
 
@@ -120,7 +121,7 @@ class _Test6State extends State<Test6> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // showEmptyBoxBottomSheet(context);
+                                    showEmptyBoxBottomSheet(context);
                                   },
                                   child: Container(
                                     width: 32,

@@ -20,7 +20,7 @@ class ProfileEditScreen extends StatelessWidget {
           resizeToAvoidBottomInset: true,
           appBar: emailAppBar(
             context,
-            "모디랑 회원가입",
+            "내 정보 수정",
             const Color(0xFF000000),
                 () => print('완료 버튼 눌림'),
           ),
