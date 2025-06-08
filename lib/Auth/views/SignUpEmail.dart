@@ -54,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar:                    emailAppBar(
+      appBar: emailAppBar(
         context,
         "모디랑 회원가입",
         const Color(0xFF000000),

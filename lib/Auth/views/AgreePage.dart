@@ -121,10 +121,10 @@ class _AgreePageState extends State<AgreePage> {
                                 child: Container(
                                   height: 48,
                                   decoration: BoxDecoration(
-                                    color: agreeToAllTerms ? const Color(0xFF05FFF7) : Colors.transparent,
+                                    color: agreeToAllTerms ? const Color(0xFF3D3D3D) : Colors.transparent,
                                     border: Border.all(
                                       width: 1.5,
-                                      color: Color(0xFF05FFF7),
+                                      color: Colors.black,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -132,24 +132,20 @@ class _AgreePageState extends State<AgreePage> {
                                     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                                     child: Row(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 28,
                                           height: 28,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                agreeToAllTerms
-                                                    ? 'assets/image/checkOn_icon.png'
-                                                    : 'assets/image/Oncheck_icon.png',
-                                              ),
-                                            ),
+                                          child: Icon(
+                                            Icons.check,
+                                            color: agreeToAllTerms ? Colors.white : Color(0xFF888888),
+                                            size: 24,
                                           ),
                                         ),
                                         const SizedBox(width: 8),
                                         Text(
                                           '전체 약관동의',
                                           style: TextStyle(
-                                            color: agreeToAllTerms ? const Color(0xFF242424) : const Color(0xFF888888),
+                                            color: agreeToAllTerms ? Colors.white : const Color(0xFF888888),
                                             fontSize: 16,
                                             fontFamily: 'Pretendard',
                                             fontWeight: FontWeight.w500,
@@ -168,7 +164,7 @@ class _AgreePageState extends State<AgreePage> {
                                   AgreementButton(
                                     isAgreed: agreeToRequiredTerms1,
                                     text: '(필수) 이용 약관 동의',
-                                    checkedImage: 'assets/image/check_icon.png',
+                                    checkedImage: 'assets/image/checkOn_icon.png',
                                     uncheckedImage: 'assets/image/Oncheck_icon.png',
                                     onTap: _toggleTermsAgreement,
                                   ),
@@ -180,7 +176,7 @@ class _AgreePageState extends State<AgreePage> {
                                   AgreementButton(
                                     isAgreed: agreeToRequiredTerms2,
                                     text: '(필수) 전금 금융 거래 이용 약관 동의',
-                                    checkedImage: 'assets/image/check_icon.png',
+                                    checkedImage: 'assets/image/checkOn_icon.png',
                                     uncheckedImage: 'assets/image/Oncheck_icon.png',
                                     onTap: _toggleTermsAgreement1,
                                   ),
@@ -192,7 +188,7 @@ class _AgreePageState extends State<AgreePage> {
                                   AgreementButton(
                                     isAgreed: agreeToRequiredTerms3,
                                     text: '(필수) 개인정보 수집 동의',
-                                    checkedImage: 'assets/image/check_icon.png',
+                                    checkedImage: 'assets/image/checkOn_icon.png',
                                     uncheckedImage: 'assets/image/Oncheck_icon.png',
                                     onTap: _toggleTermsAgreement2,
                                   ),
@@ -204,7 +200,7 @@ class _AgreePageState extends State<AgreePage> {
                                   AgreementButton(
                                     isAgreed: agreeToSelectTerms,
                                     text: '(선택) 이벤트 및 마케팅 이용 약관 동의',
-                                    checkedImage: 'assets/image/check_icon.png',
+                                    checkedImage: 'assets/image/checkOn_icon.png',
                                     uncheckedImage: 'assets/image/Oncheck_icon.png',
                                     onTap: _toggleSelectTerms,
                                   ),
@@ -250,7 +246,7 @@ Widget bottomBar(bool isButtonPressed, BuildContext context) {
                     );
                   }
                       : null,
-                  color: isButtonPressed ? const Color(0xFF05FFF7) : const Color(0xFFAFA6FF),
+                  color: isButtonPressed ? const Color(0xFF3D3D3D) : const Color(0xFF888888),
                   disabledColor: const Color(0xFF888888), // 비활성화 상태 색상 명시
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -260,7 +256,7 @@ Widget bottomBar(bool isButtonPressed, BuildContext context) {
                     '다음',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: const Color(0xFF1A1A1A),
+                      color: isButtonPressed ? Colors.white : Color(0xff1a1a1a),
                       fontSize: 14,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w700,

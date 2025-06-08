@@ -125,7 +125,7 @@ class RuleBox extends StatelessWidget {
         const Spacer(),
         Icon(
           Icons.check,
-          color: isValid ? const Color(0xFF05FFF7) : const Color(0xFFCCCCCC),
+          color: isValid ? const Color(0xFF3D3D3D) : const Color(0xFFCCCCCC),
         ),
       ],
     );
