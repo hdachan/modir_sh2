@@ -217,7 +217,7 @@ class _Card2State extends State<Card2> {
             SizedBox(
               height: 40,
               child: Text(
-                widget.feed.content,
+                widget.feed.title,
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontSize: fontSizeContent,
