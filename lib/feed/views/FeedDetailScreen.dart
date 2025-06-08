@@ -132,10 +132,10 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text(
-          "숨김 확인",
+          "삭제 확인",
           style: TextStyle(fontFamily: 'Pretendard', fontWeight: FontWeight.w500),
         ),
-        content: const Text("이 게시물을 숨기시겠습니까?"),
+        content: const Text("이 게시물을 삭제 하시겠습니까?"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -150,17 +150,17 @@ class _FeedDetailScreenState extends State<FeedDetailScreen> {
               try {
                 await viewModel.deleteFeed(widget.feedId);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('게시물이 숨겨졌습니다')),
+                  const SnackBar(content: Text('게시물이 삭제 되었습니다.')),
                 );
                 context.go('/community');
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('숨김 실패: $e')),
+                  SnackBar(content: Text('삭제 실패: $e')),
                 );
               }
             },
             child: const Text(
-              "숨기기",
+              "삭제하기",
               style: TextStyle(fontFamily: 'Pretendard', color: Colors.red),
             ),
           ),

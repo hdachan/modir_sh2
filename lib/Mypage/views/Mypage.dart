@@ -151,7 +151,7 @@ class _stateMyPageScreen extends State<MyPageScreen>
                                                   child: Text(
                                                     profileVM.nicknameController.text.isNotEmpty
                                                         ? profileVM.nicknameController.text
-                                                        : '모디랑님',
+                                                        : '닉네임을 설정해주세요!',
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 14,

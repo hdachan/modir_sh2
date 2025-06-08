@@ -102,7 +102,7 @@ class _Test6State extends State<Test6> {
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: () {
-                                    context.go('/mypage/edit');
+                                    context.push('/mypage/edit');
                                   },
                                   child: Container(
                                     width: 32,
