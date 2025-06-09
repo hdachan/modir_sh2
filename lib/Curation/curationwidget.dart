@@ -33,16 +33,16 @@ PreferredSizeWidget curationcustomAppBar(
                 ),
 
                 // more_vert 아이콘
-                IconButton(
-                  icon: const Icon(
-                    Icons.more_vert,
-                    color: Colors.black,
-                    size: 24,
-                  ),
-                  onPressed: () {
-                    print("more_vert 클릭");
-                  },
-                ),
+                // IconButton(
+                //   icon: const Icon(
+                //     Icons.more_vert,
+                //     color: Colors.black,
+                //     size: 24,
+                //   ),
+                //   onPressed: () {
+                //     print("more_vert 클릭");
+                //   },
+                // ),
               ],
             ),
           ),

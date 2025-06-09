@@ -30,7 +30,7 @@ class WelcomeHeader extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: '에서 다양한\n모든 정보를 확인하세요',
+                  text: '에서 다양한\n모든 정보를 추천 받아보세요',
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 24,
@@ -47,7 +47,7 @@ class WelcomeHeader extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           const Text(
-            '나만의 분위기 , 라이프스타일 , 스타일링에 따라 매장을 추천받아보세요',
+            '나만의 취향 , 라이프스타일 , 여러가지를 추천 받을 수 있습니다!',
             style: TextStyle(
               color: Colors.black,
               fontSize: 14,
