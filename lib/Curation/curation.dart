@@ -427,8 +427,7 @@ class _Test6State extends State<Test6> {
                           viewCount: feed.hits,
                           date: dateFormat.format(feed.createdAt),
                           onTap: () {
-                            print('카드가 눌렸어요!'); // 여기로 경로 수정
-                            // 원하는 동작 구현
+                            context.push('/community/detail/${feed.feedId}');
                           },
                         );
                       }).toList(),
